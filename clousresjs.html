@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<!-- JS Closured (inner function using outer value). Program prints num 1, 2  and 3 and generates alet on which is clicked . this requires closures 
+	to save copies of eralier values ieterated over . eventlistner onclick is returend alert function with the value that was stoed in numCopy at
+	that iteration -->
+<body>
+	<script type="text/javascript">
+		document.body.innerHTML = '';
+		var nums = [1,2,3]
+		// Let's loop over the numbers in our array
+		for (var i = 0; i < nums.length; i++) {
+		    // This is the number we're on...
+		    var num = nums[i];
+		    // We're creating a DOM element for the number
+		    var elem = document.createElement('div');
+		    elem.textContent = num;
+		    // ... and when we click, alert the value of `num`
+		    elem.addEventListener('click', (function(numCopy) { // () is wrapped anonymous function and called on the fly at each loop and stores a 
+		    	// copy of num /. when a click is registered actual altert of that copy is rendered
+		        return function() {
+		            alert(numCopy);
+		        };
+		    })(num));
+
+		    document.body.appendChild(elem);
+		};
+	</script>
+</body>
+</html>
